@@ -1,0 +1,13 @@
+Welcome to our client!
+follow the next steps please:
+1-install node.js 16.15.0 https://nodejs.org/download/release/v16.15.0/
+2-save client folder on your computer
+3-open folder in terminal
+4- enter "npm i"
+5- enter "npm start" (it will open on localhost:3000 in the browser)
+
+*for now only login and registering cases interact with our spring API, still didnt handle all error cases.
+
+some functionalitiy may not work with new server changes
+for home page add "/a" to basic url
+You can click on "services" and then "TlvOracle" to arrive in chat page 
