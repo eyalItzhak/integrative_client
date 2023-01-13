@@ -1,63 +1,60 @@
-import { makeAutoObservable} from "mobx";
+import { makeAutoObservable } from "mobx";
 import { history } from "../..";
 import agent from "../../api/agent";
 // import agent from "../api/agent";
-import { UserFormValues } from "../models/user";
+import { User, UserFormValues } from "../models/user";
 import { store } from "./store";
 
 export default class UserStore {
-    user: UserFormValues | null = null;
+  user: User | null = null;
 
-    constructor() {
-        makeAutoObservable(this)
+  constructor() {
+    makeAutoObservable(this);
+    this.userFromLOcalstorage();
+  }
+
+  get isLoggedIn() {
+    return !!this.user;
+  }
+
+  userFromLOcalstorage = () => {
+    const userJson = localStorage.getItem("user");
+    if (userJson) {
+      this.user = JSON.parse(userJson);
+      console.log("get user from localstorage");
     }
+  };
 
-    get isLoggedIn() {
-        return !!this.user;
+  login = async (creds: UserFormValues) => {
+    try {
+      const getUser = await agent.Account.login(creds);
+      this.saveUser(getUser);
+      store.modalStore.closeModal();
+    } catch (error) {
+      throw error;
     }
+  };
 
-    login = async (creds: UserFormValues) => {
-        try {
-            const user = await agent.Account.login(creds);
-            console.log(user);
-            history.push('/Services');
-            store.modalStore.closeModal();
-            
-            console.log(creds);
-        } catch (error) {
-            throw error;
-        }
+  logout = () => {
+    localStorage.removeItem("user");
+    this.user = null;
+    history.push("/");
+    console.log("logut");
+  };
+
+  register = async (creds: UserFormValues) => {
+    try {
+      const getUser = await agent.Account.register(creds);
+      this.saveUser(getUser);
+      store.modalStore.closeModal();
+    } catch (error) {
+      throw error;
     }
+  };
 
-    logout = () => {
-        // store.commonStore.setToken(null);
-        // window.localStorage.removeItem('jwt');
-        // this.user = null;
-        // history.push('/');
-        console.log("logut");
-    }
-
-    getUser = async () => {
-        try {
-            // const user = await agent.Account.current();
-            // runInAction(() => this.user = user);
-            console.log("get user");
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    register = async (creds: UserFormValues) => {
-        try {
-             const user = await agent.Account.register(creds);
-             console.log(user);
-            history.push('/Services');
-            store.modalStore.closeModal();
-            
-        } catch (error) {
-            throw error;
-        }
-    }
-
-
+  saveUser = (user: User) => {
+    this.user = user;
+    localStorage.setItem("user", JSON.stringify(this.user));
+    history.push("/Services");
+  };
 }

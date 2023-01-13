@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 import { Form, TextArea, Card } from "semantic-ui-react";
 import {gptAnswerCommand} from "../../api/Interfaces/mokupCommands";
+import { observer } from "mobx-react-lite";
+import { useStore } from "../../app/stores/store";
 
-export default function OracleGptDashboard() {
+
+export default observer(function OracleGptDashboard() {
+  const {userStore} = useStore();
   const [q, setq] = useState("");
   const [ans, setAns] = useState<any[]>([]);
   const [isLoading ,setIsLoading] = useState(false)
+
+  console.log(userStore.user?.userId.email)
 
   const handleChange = (e: any, Form: any) => {
     setq(Form.value);
@@ -13,7 +19,8 @@ export default function OracleGptDashboard() {
 
   const handleSubmit = async () => {
   setIsLoading(true);
-    const myans = await gptAnswerCommand(q);
+  
+    const myans = await gptAnswerCommand(q,userStore.user!);
     const element = {
       header: `${q}`,
       description: `${myans.text}`,
@@ -38,4 +45,4 @@ export default function OracleGptDashboard() {
       </Form>
     </>
   );
-}
+})

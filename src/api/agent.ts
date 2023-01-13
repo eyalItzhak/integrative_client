@@ -37,7 +37,8 @@ const GptOrcal = {
 
 const TlvWeather = {
     getWeather: (creds: Command) => requests.post<Weather>(`/miniapp/weather`,creds), // need to change this from string
-}   
+}
+
 
 
 

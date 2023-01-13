@@ -1,7 +1,11 @@
+import { User } from "../../app/models/user";
 import agent from "../agent";
-import {Command} from "./command";
+import { Command } from "./command";
 
-export const gptAnswerCommand =  async(q : string ) => {
+export const gptAnswerCommand = async (q: string, user: User) => {
+
+  console.log(user.userId.email)
+
   const myCommand: Command = {
     commandId: {
       superapp: "2023a.Assaf.Ariely",
@@ -17,19 +21,17 @@ export const gptAnswerCommand =  async(q : string ) => {
     },
     invocationTimeStamp: "2022-11-26T15:15:18.479+00:00",
     invokedBy: {
-      userId: { superapp: "2023a.Assaf.Ariely", email: "assaf@demo.org" },
+      userId: { superapp: "2023a.Assaf.Ariely", email: `${user.userId.email!}` },
     },
     commandAttributes: { prompt: `${q}` },
   };
 
-  const ans = agent.GptOrcal.getAnswer(myCommand)
-
+  const ans = agent.GptOrcal.getAnswer(myCommand);
 
   return ans;
-}
+};
 
-
-export const GetWetherCommand =  async() => {
+export const GetWetherCommand = async (user: User) => {
   const myCommand: Command = {
     commandId: {
       superapp: "2023a.Assaf.Ariely",
@@ -50,10 +52,7 @@ export const GetWetherCommand =  async() => {
     commandAttributes: { prompt: `no relvent` },
   };
 
-  const ans = agent.TlvWeather.getWeather(myCommand)
-
+  const ans = agent.TlvWeather.getWeather(myCommand);
 
   return ans;
-}
-
-
+};

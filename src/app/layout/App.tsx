@@ -12,10 +12,8 @@ function App() {
 
   return (
     <>
-      
       <Route exact path='/' component={HomePage} />
       <ModalContainer />
-
       <Route
         path={'/(.+)'}
         render={() => (

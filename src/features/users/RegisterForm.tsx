@@ -11,11 +11,13 @@ export default observer(function RegisterForm() {
     const {userStore} = useStore();
     return (
         <Formik
-            initialValues={{role: '', username: '', email: '', avatar: '', error: null}}
+            initialValues={{role: 'MINIAPP_USER', username: '', email: '', avatar: '', error: null}}
+
             onSubmit={(values, {setErrors}) => userStore.register(values).catch(error => 
                 setErrors({error}))}
+
             validationSchema={Yup.object({
-                role: Yup.string().required(),
+                // role: Yup.string().required(),
                 username: Yup.string().required(),
                 email: Yup.string().required().email(),
                 avatar: Yup.string().required(),
@@ -24,7 +26,7 @@ export default observer(function RegisterForm() {
             {({handleSubmit, isSubmitting, errors, isValid, dirty}) => (
                 <Form className='ui form error' onSubmit={handleSubmit} autoComplete='off'>
                     <Header as='h2' content='Sign up to Tlvibe' color='teal' textAlign='center' />
-                    <MyTextInput name='role' placeholder='Role' />
+                    {/* <MyTextInput name='role' placeholder='Role' /> */}
                     <MyTextInput name='username' placeholder='Username' />
                     <MyTextInput name='email' placeholder='Email' />
                     <MyTextInput name='avatar' placeholder='Avatar'/>

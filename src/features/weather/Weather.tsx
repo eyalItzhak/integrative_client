@@ -1,17 +1,20 @@
+import { observer } from "mobx-react-lite";
 import React ,{useEffect,useState} from "react";
 import { GetWetherCommand } from "../../api/Interfaces/mokupCommands";
+import { useStore } from "../../app/stores/store";
 import WetherDashboard from "./WetherDashboard";
 // import { Form, TextArea, Card } from "semantic-ui-react";
 // import mockupCommand from "../../api/Interfaces/mokupCommands";
 
-export default function Weather() {
+export default observer( function Weather() {
 
+    const {userStore} = useStore();
     const [weather, setWeather] = useState<any>(false);
 
 
     useEffect(() => {
         const fetchData = async () => {
-                const weatherData =  await GetWetherCommand();
+                const weatherData =  await GetWetherCommand(userStore.user!);
                 console.log(weatherData);
                 setWeather(weatherData);
         }
@@ -28,4 +31,4 @@ export default function Weather() {
     </>)
   
 
-}
+})
