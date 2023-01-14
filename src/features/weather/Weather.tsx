@@ -19,7 +19,7 @@ export default observer( function Weather() {
                 setWeather(weatherData);
         }
         fetchData().catch(console.error);
-    },[setWeather])
+    },[setWeather,userStore])
 
     
     
