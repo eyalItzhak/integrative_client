@@ -47,7 +47,7 @@ export default observer(function HomePage() {
 
    {loginUser && (
           <>
-            <h1>you are allredy log in</h1>
+            <h1>you are already login</h1>
             <Button
               as={NavLink} to='/Services' name='Services'
               size="huge"
