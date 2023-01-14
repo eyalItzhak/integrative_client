@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
 import { User, UserFormValues } from '../app/models/user';
-import { Command, gptAnswr, Weather } from './Interfaces/command';
+import { Command, gptAnswr, limeScotter, tireScotter, Weather } from './Interfaces/command';
 
 
 axios.defaults.baseURL = 'http://127.0.0.1:8082/superapp';
@@ -39,13 +39,19 @@ const TlvWeather = {
     getWeather: (creds: Command) => requests.post<Weather>(`/miniapp/weather`,creds), // need to change this from string
 }
 
+const getScooter = {
+    getTire  :(creds : Command) => requests.post<tireScotter[]>(`/miniapp/tier`,creds),
+    getLime : (creds : Command) => requests.post<limeScotter[]>(`/miniapp/lime`,creds)
+}
+
 
 
 
 const agent = {
     Account,
     GptOrcal,
-    TlvWeather
+    TlvWeather,
+    getScooter
 }
 
 export default agent;

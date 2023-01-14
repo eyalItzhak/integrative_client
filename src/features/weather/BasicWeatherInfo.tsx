@@ -4,10 +4,8 @@ import { Statistic } from "semantic-ui-react";
 interface props{
     temp_c : number ;
     feelslike_c : number ;
-
     last_updated : string ;
     humidity : number ;
-
 }
 
  export default function BasicWeatherInfo({temp_c,feelslike_c,last_updated,humidity}:props) {

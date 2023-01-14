@@ -23,7 +23,12 @@ export interface InvokedBy {
 }
 
 export interface CommandAttributes {
-  prompt: string;
+  prompt?: string;
+  lat ?:number,
+  lng?: number,
+  radius? : any,
+  user_latitude? :number,
+  user_longitude?: number
 }
 
 export interface Command {
@@ -91,4 +96,16 @@ export interface Current {
 export interface Weather {
   location: Location;
   current: Current;
+}
+
+export interface tireScotter {
+  lat: number;
+  lng: number;
+  batteryLevel: number;
+}
+
+export interface limeScotter {
+  longitude: number;
+  latitude: number;
+  battery_percentage: number;
 }
