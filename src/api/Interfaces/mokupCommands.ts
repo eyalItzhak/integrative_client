@@ -3,13 +3,7 @@ import agent from "../agent";
 import { Command, limeScotter, tireScotter } from "./command";
 
 export const gptAnswerCommand = async (q: string, user: User) => {
-
   const myCommand: Command = {
-    commandId: {
-      superapp: "2023a.Assaf.Ariely",
-      miniapp: "dummyApp",
-      internalCommandId: "490edcaf-08db-4eac-a1e3-2cbf7932c412",
-    },
     command: "chatAnswer",
     targetObject: {
       objectId: {
@@ -17,7 +11,7 @@ export const gptAnswerCommand = async (q: string, user: User) => {
         internalObjectId: "050666",
       },
     },
-    invocationTimeStamp: "2022-11-26T15:15:18.479+00:00",
+
     invokedBy: {
       userId: {
         superapp: "2023a.Assaf.Ariely",
@@ -35,11 +29,6 @@ export const gptAnswerCommand = async (q: string, user: User) => {
 
 export const GetWetherCommand = async (user: User) => {
   const myCommand: Command = {
-    commandId: {
-      superapp: "2023a.Assaf.Ariely",
-      miniapp: "weather",
-      internalCommandId: "490edcaf-08db-4eac-a1e3-2cbf7932c412",
-    },
     command: "getTlvWeather",
     targetObject: {
       objectId: {
@@ -47,7 +36,7 @@ export const GetWetherCommand = async (user: User) => {
         internalObjectId: "807060",
       },
     },
-    invocationTimeStamp: "2022-11-26T15:15:18.479+00:00",
+
     invokedBy: {
       userId: {
         superapp: "2023a.Assaf.Ariely",
@@ -62,14 +51,14 @@ export const GetWetherCommand = async (user: User) => {
   return ans;
 };
 
-export const GetTireScooter = async (user: User,FormScooterType:string,lat:number,lng:number,range :number) => {
-
+export const GetTireScooter = async (
+  user: User,
+  FormScooterType: string,
+  lat: number,
+  lng: number,
+  range: number
+) => {
   const myCommand: Command = {
-    commandId: {
-      superapp: "2023a.Assaf.Ariely",
-      miniapp: "weather",
-      internalCommandId: "490edcaf-08db-4eac-a1e3-2cbf7932c412",
-    },
     command: "getScooters",
     targetObject: {
       objectId: {
@@ -77,7 +66,7 @@ export const GetTireScooter = async (user: User,FormScooterType:string,lat:numbe
         internalObjectId: "123456",
       },
     },
-    invocationTimeStamp: "2022-11-26T15:15:18.479+00:00",
+
     invokedBy: {
       userId: {
         superapp: "2023a.Assaf.Ariely",
@@ -96,17 +85,8 @@ export const GetTireScooter = async (user: User,FormScooterType:string,lat:numbe
   return ans;
 };
 
-
-
-export const GetLimeScooter = async (user: User,lat:number,lng:number) => {
-
-  
+export const GetLimeScooter = async (user: User, lat: number, lng: number) => {
   const myCommand: Command = {
-    commandId: {
-      superapp: "2023a.Assaf.Ariely",
-      miniapp: "weather",
-      internalCommandId: "490edcaf-08db-4eac-a1e3-2cbf7932c412",
-    },
     command: "getScooters",
     targetObject: {
       objectId: {
@@ -114,7 +94,7 @@ export const GetLimeScooter = async (user: User,lat:number,lng:number) => {
         internalObjectId: "123456",
       },
     },
-    invocationTimeStamp: "2022-11-26T15:15:18.479+00:00",
+
     invokedBy: {
       userId: {
         superapp: "2023a.Assaf.Ariely",
@@ -127,13 +107,13 @@ export const GetLimeScooter = async (user: User,lat:number,lng:number) => {
     },
   };
 
-  const ans :limeScotter[] = await agent.getScooter.getLime(myCommand);
-  
-    
-  const tireFormatConvertor :tireScotter[] = ans.map((scooter)=>(
-    {lat:scooter.latitude,lng:scooter.longitude,batteryLevel:scooter.battery_percentage}
-  ))
-  
+  const ans: limeScotter[] = await agent.getScooter.getLime(myCommand);
+
+  const tireFormatConvertor: tireScotter[] = ans.map((scooter) => ({
+    lat: scooter.latitude,
+    lng: scooter.longitude,
+    batteryLevel: scooter.battery_percentage,
+  }));
 
   return tireFormatConvertor;
 };

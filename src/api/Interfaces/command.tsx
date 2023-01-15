@@ -1,8 +1,3 @@
-export interface CommandId {
-  superapp: string;
-  miniapp: string;
-  internalCommandId: string;
-}
 
 export interface ObjectId {
   superapp: string;
@@ -32,10 +27,8 @@ export interface CommandAttributes {
 }
 
 export interface Command {
-  commandId: CommandId;
   command: string;
   targetObject: TargetObject;
-  invocationTimeStamp: string;
   invokedBy: InvokedBy;
   commandAttributes: CommandAttributes;
 }

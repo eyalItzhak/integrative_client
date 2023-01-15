@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import {Route, Switch } from 'react-router-dom';
 import HomePage from '../../features/home/HomePage';
 import { observer } from 'mobx-react-lite';
 import ModalContainer from '../common/modals/ModalContainer';
@@ -26,6 +26,8 @@ function App() {
                 <Route exact path='/Services/Tlv Oracle' component={OracleGptDashboard} />
                 <Route exact path='/Services/weather' component={Weather} />
                 <Route exact path='/Services/Transportation' component={TransportationDashboard}/>
+                <Route path='*' exact={true} component={ServicesDashboard} />
+                
               </Switch>
             </Container>
           </>
