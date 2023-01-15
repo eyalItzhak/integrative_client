@@ -27,12 +27,21 @@ export default observer(function TransportationDashboard() {
   };
 
   const handleChangeLat = (e: any, Form: any) => {
+    if(Form.value)
     setLat(Number(Form.value));
   };
 
   const handleChangelng = (e: any, Form: any) => {
     setLng(Number(Form.value));
   };
+
+  const handleUserMapClick = (lat : number ,lng : number ) => {
+
+    setLat(lat)
+    setLng(lng)
+    console.log(lat ,lng)
+    
+  }
 
 
 
@@ -42,12 +51,10 @@ export default observer(function TransportationDashboard() {
     let myScooterList;
     console.log(FormScooterType)
     if(FormScooterType==="Tr"){
-     console.log("asdsad")
      myScooterList = await GetTireScooter(userStore.user!,FormScooterType,lat,lng);
     }
     else
-     myScooterList = await GetLimeScooter(userStore.user!,lat,lng);
-
+    myScooterList = await GetLimeScooter(userStore.user!,lat,lng);
     setScootterList(myScooterList);
     console.log(myScooterList);
     setLoadGoogleMap(true);
@@ -76,6 +83,8 @@ export default observer(function TransportationDashboard() {
             control={Input}
             label="lat"
             placeholder="your lat"
+            value={lat}
+            readOnly={true}
           />
 
           <Form.Field
@@ -83,7 +92,8 @@ export default observer(function TransportationDashboard() {
             id="form-input-control-first-name"
             control={Input}
             label="lng"
-            placeholder="your lng"
+            value={lng}
+            readOnly={true}
           />
         </Form.Group>
 
@@ -95,7 +105,7 @@ export default observer(function TransportationDashboard() {
         />
       </Form>
       {loadGoogleMap && (
-        <GoogleMapService markers={scootterList} />
+        <GoogleMapService markers={scootterList} handleUserMapClick={handleUserMapClick}  />
       )}
     </>
   );

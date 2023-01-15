@@ -19,10 +19,11 @@ interface cordination{
 
 interface Props {
   markers :cordination[] ;
+  handleUserMapClick : (lat:number,lng:number) =>void
 }
 
 
-function MyComponent({ markers}: Props ) {
+function MyComponent({ markers,handleUserMapClick}: Props ) {
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -31,7 +32,15 @@ function MyComponent({ markers}: Props ) {
 
 
   return isLoaded ? (
-    <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10}>
+    <GoogleMap
+    onClick={(ev) => {
+      console.log("latitide = ", ev.latLng?.lat());
+      console.log("longitude = ", ev.latLng?.lng());
+      handleUserMapClick(ev.latLng?.lat()!,ev.latLng?.lng()!)
+    }}
+    
+    
+    mapContainerStyle={containerStyle} center={center} zoom={10}>
      {markers.map(marker => (
     <Marker
       position={{ lat: marker.lat, lng: marker.lng }}
