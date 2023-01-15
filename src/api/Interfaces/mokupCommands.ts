@@ -3,7 +3,6 @@ import agent from "../agent";
 import { Command, limeScotter, tireScotter } from "./command";
 
 export const gptAnswerCommand = async (q: string, user: User) => {
-  console.log(user.userId.email);
 
   const myCommand: Command = {
     commandId: {
@@ -15,7 +14,7 @@ export const gptAnswerCommand = async (q: string, user: User) => {
     targetObject: {
       objectId: {
         superapp: "2023a.Assaf.Ariely",
-        internalObjectId: "bf10a7cc-3f27-4b2a-8f9d-1b7dc1bb1475",
+        internalObjectId: "050666",
       },
     },
     invocationTimeStamp: "2022-11-26T15:15:18.479+00:00",
@@ -45,7 +44,7 @@ export const GetWetherCommand = async (user: User) => {
     targetObject: {
       objectId: {
         superapp: "2023a.Assaf.Ariely",
-        internalObjectId: "bf10a7cc-3f27-4b2a-8f9d-1b7dc1bb1475",
+        internalObjectId: "807060",
       },
     },
     invocationTimeStamp: "2022-11-26T15:15:18.479+00:00",
@@ -63,10 +62,8 @@ export const GetWetherCommand = async (user: User) => {
   return ans;
 };
 
-export const GetTireScooter = async (user: User,FormScooterType:string,lat:number,lng:number) => {
-  console.log(lat)
-  console.log(lng)
-  
+export const GetTireScooter = async (user: User,FormScooterType:string,lat:number,lng:number,range :number) => {
+
   const myCommand: Command = {
     commandId: {
       superapp: "2023a.Assaf.Ariely",
@@ -77,7 +74,7 @@ export const GetTireScooter = async (user: User,FormScooterType:string,lat:numbe
     targetObject: {
       objectId: {
         superapp: "2023a.Assaf.Ariely",
-        internalObjectId: "bf10a7cc-3f27-4b2a-8f9d-1b7dc1bb1475",
+        internalObjectId: "123456",
       },
     },
     invocationTimeStamp: "2022-11-26T15:15:18.479+00:00",
@@ -90,7 +87,7 @@ export const GetTireScooter = async (user: User,FormScooterType:string,lat:numbe
     commandAttributes: {
       lat: lat,
       lng: lng,
-      radius: 1000,
+      radius: range,
     },
   };
 
@@ -114,7 +111,7 @@ export const GetLimeScooter = async (user: User,lat:number,lng:number) => {
     targetObject: {
       objectId: {
         superapp: "2023a.Assaf.Ariely",
-        internalObjectId: "bf10a7cc-3f27-4b2a-8f9d-1b7dc1bb1475",
+        internalObjectId: "123456",
       },
     },
     invocationTimeStamp: "2022-11-26T15:15:18.479+00:00",
